@@ -60,6 +60,7 @@ for t in xrange (1,cellst+1):
     if hole[0] == 1 and hole_function == 1:
         print str(t) + ', hole'
         eta_ghost = f_hole(eta_old,eta_ghost,direction)
+    	eta_ghost = f_bc1(eta_ghost)
         direction,slope,hole = f_direction(eta_ghost,direction,slope,hole)
         eta_old = f_hole_update(eta_old,eta_ghost)
     discharge,area = f_discharge(discharge,area,direction,precipitation)		
