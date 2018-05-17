@@ -86,5 +86,15 @@ for t in xrange (1,cellst+1):
             f_print(precipitation,'precipitation',plot_array[t],parent_folder)
         print str(int(float(t)/float(cellst) * 1000.) / 10.) +'% done'
     eta_old, eta_new, area, discharge,incision,diffusion = f_update(eta_old, eta_new, area, discharge,incision,diffusion)
+
+#cleanup
+for files_temp in os.listdir(parent_folder+'/modules'):
+    if files_temp.endswith('.pyc'):
+        os.remove(parent_folder+'/modules/'+files_temp)
+for files_temp in os.listdir(parent_folder+'/parameters'):
+    if files_temp.endswith('.pyc'):
+        os.remove(parent_folder+'/parameters/'+files_temp)
+
 stop_time = time.time()
+
 print str(round((stop_time -start_time )/60.,1))+' mins'
