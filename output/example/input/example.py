@@ -33,11 +33,11 @@ time_unit = 'yr' #'sec' or 'hr' or 'yr'
 length_unit = 'm'#'mm' or 'm' or 'km'
 
 #number of cells <---THIS WILL BE OVERWRITTEN IF THERE IS AN INPUT FILE
-cellsx = 50
-cellsy = 50
+cellsx = 100
+cellsy = 100
 
 #time step
-dt = 500. # time unit
+dt = 100. # time unit
 
 #boundary conditions: 0-closed,1-open,2-periodic (NOTE: if top/bottom or left/right must both be 2 in order to work)
 #list is top, bottom, left, right
@@ -57,7 +57,7 @@ Lx = 1000. # length unit
 Ly = 1000. # length unit
 
 #simulation time
-sim_time = 5. * 10. ** (6.) # time unit
+sim_time = 1. * 10. ** (6.) # time unit
 
 #uplift rate
 U = 0.001 #length unit / time unit
@@ -65,7 +65,7 @@ U = 0.001 #length unit / time unit
 #stream power incision model
 m = 0.5 #-
 n = 1.0 #-
-K = 1.0 * 10. ** (-5.) #length unit ^ (1-3m) / time unit ^(1-m)
+K = 1.0 * 10. ** (-4.) #length unit ^ (1-3m) / time unit ^(1-m)
 P = 1.0 #length unit / time unit
 
 #diffusion coefficient
