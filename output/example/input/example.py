@@ -33,8 +33,8 @@ time_unit = 'yr' #'sec' or 'hr' or 'yr'
 length_unit = 'm'#'mm' or 'm' or 'km'
 
 #number of cells <---THIS WILL BE OVERWRITTEN IF THERE IS AN INPUT FILE
-cellsx = 150
-cellsy = 150
+cellsx = 50
+cellsy = 50
 
 #time step
 dt = 500. # time unit
