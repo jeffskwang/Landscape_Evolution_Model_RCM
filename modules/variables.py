@@ -13,7 +13,7 @@ discharge = [[0.0 for i in xrange(cellsy+2)]for j in xrange(cellsx+2)]
 incision = [[0. for i in xrange(cellsy+2)]for j in xrange(cellsx+2)]
 diffusion = [[0. for i in xrange(cellsy+2)]for j in xrange(cellsx+2)]
 precipitation = [[P for i in xrange(cellsy+2)]for j in xrange(cellsx+2)]
-curvature = [[0. for i in xrange(cellsy+2)]for j in xrange(cellsx+2)]
+lateral_incision = [[0. for i in xrange(cellsy+2)]for j in xrange(cellsx+2)]
 uplift = [[U for i in xrange(cellsy+2)]for j in xrange(cellsx+2)]
 
 hole = [0]

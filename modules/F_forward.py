@@ -3,7 +3,7 @@ import sys
 parameters = importlib.import_module(sys.argv[1])
 globals().update(parameters.__dict__)
 
-def f_forward(eta_old,eta_new,discharge,slope,uplift,precipitation,incision,diffusion):
+def f_forward(eta_old,eta_new,discharge,slope,uplift,precipitation,incision,diffusion,lateral_incision):
         for x in xrange(1,cellsx+1):
                 eta_new[x][1] = eta_old[x][1]
                 eta_new[x][cellsy] = eta_old[x][cellsy]
@@ -22,7 +22,7 @@ def f_forward(eta_old,eta_new,discharge,slope,uplift,precipitation,incision,diff
 			
 			incision[x][y] = K *(discharge[x][y]**m)*(slope[x][y]**n)
 			
-			eta_new[x][y] = eta_old[x][y] + dt * (uplift[x][y] + diffusion[x][y] - incision[x][y])
+			eta_new[x][y] = eta_old[x][y] + dt * (uplift[x][y] + diffusion[x][y] - incision[x][y] - lateral_incision[x][y])
                 
 	return eta_new,incision,diffusion
 			

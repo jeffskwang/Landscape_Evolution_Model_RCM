@@ -12,6 +12,7 @@ input_file = ''
 #controls
 hole_function = 1 #1 is on , 0 is off
 diffusion_deposition = 0 #0 do not allow, 1 is allow
+lateral_incision_boolean = 1
 
 #outputs: 0- don't plot, 1 - plot
 elevation_plot = 1
@@ -20,7 +21,8 @@ uplift_plot = 0
 slope_plot = 0
 direction_plot = 0
 discharge_plot = 1
-incision_plot = 0
+incision_plot = 1
+lateral_incision_plot = 1
 diffusion_plot = 0
 precipitation_plot = 0
 
@@ -41,7 +43,7 @@ dt = 100. # time unit
 
 #boundary conditions: 0-closed,1-open,2-periodic (NOTE: if top/bottom or left/right must both be 2 in order to work)
 #list is top, bottom, left, right
-BC = [1,1,2,2]
+BC = [0,1,0,0]
 #can only be closed or open
 nan_BC = 0
 
@@ -67,6 +69,11 @@ m = 0.5 #-
 n = 1.0 #-
 K = 1.0 * 10. ** (-4.) #length unit ^ (1-3m) / time unit ^(1-m)
 P = 1.0 #length unit / time unit
+
+#lateral erosion component
+m_l = 1.0
+n_l = 1.0
+Kl = K * 0.25
 
 #diffusion coefficient
 D = 0.0 #length unit ^ (2) / time unit
@@ -143,6 +150,51 @@ xn = [-1,0,1,-1,1,-1,0,1]
 yn = [1,1,1,0,0,-1,-1,-1]
 dn = [(dx**2.0+dy**2.0)**0.5,dy,(dx**2.0+dy**2.0)**0.5,dx,dx,(dx**2.0+dy**2.0)**0.5,dy,(dx**2.0+dy**2.0)**0.5]
 dop = [7,6,5,4,3,2,1,0]
+
+#lateral node dictionary
+#0|1|2
+#3|x|4
+#5|6|7
+lateral_nodes = {'11': (0,2,0.23/dx),\
+                 '33': (0,5,0.23/dx),\
+                 '44': (2,7,0.23/dx),\
+                 '66': (5,7,0.23/dx),\
+                 '13': (1,1,1.37/dx),\
+                 '14': (1,1,1.37/dx),\
+                 '41': (4,4,1.37/dx),\
+                 '46': (4,4,1.37/dx),\
+                 '63': (6,6,1.37/dx),\
+                 '64': (6,6,1.37/dx),\
+                 '31': (3,3,1.37/dx),\
+                 '36': (3,3,1.37/dx),\
+                 '10': (1,1,0.67/dx),\
+                 '12': (1,1,0.67/dx),\
+                 '42': (4,4,0.67/dx),\
+                 '47': (4,4,0.67/dx),\
+                 '65': (6,6,0.67/dx),\
+                 '67': (6,6,0.67/dx),\
+                 '30': (3,3,0.67/dx),\
+                 '35': (3,3,0.67/dx),\
+                 '00': (1,3,0.23/dx),\
+                 '22': (1,4,0.23/dx),\
+                 '55': (3,6,0.23/dx),\
+                 '77': (4,6,0.23/dx),\
+                 '02': (0,0,1.37/dx),\
+                 '05': (0,0,1.37/dx),\
+                 '20': (2,2,1.37/dx),\
+                 '27': (2,2,1.37/dx),\
+                 '50': (5,5,1.37/dx),\
+                 '57': (5,5,1.37/dx),\
+                 '72': (7,7,1.37/dx),\
+                 '75': (7,7,1.37/dx),\
+                 '01': (0,0,0.67/dx),\
+                 '03': (0,0,0.67/dx),\
+                 '21': (2,2,0.67/dx),\
+                 '24': (2,2,0.67/dx),\
+                 '53': (5,5,0.67/dx),\
+                 '56': (5,5,0.67/dx),\
+                 '74': (7,7,0.67/dx),\
+                 '76': (7,7,0.67/dx)}
 
 #boundary conditions
 x_lower = 1

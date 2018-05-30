@@ -59,14 +59,16 @@ for t in xrange (1,cellst+1):
     eta_old = f_bc1(eta_old)
     direction,slope,hole = f_direction(eta_old,direction,slope,hole)
     if hole[0] == 1 and hole_function == 1:
-        print str(t) + ', hole'
+        #print 'time step ' + str(t) + ', hole'
         eta_ghost = f_hole(eta_old,eta_ghost,direction)
     	eta_ghost = f_bc1(eta_ghost)
         direction,slope,hole = f_direction(eta_ghost,direction,slope,hole)
-        eta_old = f_hole_update(eta_old,eta_ghost)
-    discharge,area = f_discharge(discharge,area,direction,precipitation)		
+        eta_old = f_hole_update(eta_old,eta_ghost)        
+    discharge,area = f_discharge(discharge,area,direction,precipitation)
+    if lateral_incision_boolean == 1 and t > cellst / 2:
+        lateral_incision = f_lateral(discharge,lateral_incision,area,slope,direction)        
     eta_old = f_bc2(eta_old)
-    eta_new,incision,diffusion = f_forward(eta_old,eta_new,discharge,slope,uplift,precipitation,incision,diffusion)
+    eta_new,incision,diffusion = f_forward(eta_old,eta_new,discharge,slope,uplift,precipitation,incision,diffusion,lateral_incision)
     if plot_array[t] != 0 or t == 1:
         if elevation_plot == 1:
             f_print(eta_new,'elevation',plot_array[t],parent_folder)
@@ -82,12 +84,14 @@ for t in xrange (1,cellst+1):
             f_print(discharge,'discharge',plot_array[t],parent_folder)
         if incision_plot == 1:
             f_print(incision,'incision',plot_array[t],parent_folder)
+        if lateral_incision_plot == 1:
+            f_print(lateral_incision,'lateral_incision',plot_array[t],parent_folder)
         if diffusion_plot == 1:
             f_print(diffusion,'diffusion',plot_array[t],parent_folder)
         if precipitation_plot == 1:
             f_print(precipitation,'precipitation',plot_array[t],parent_folder)
         print str(int(float(t)/float(cellst) * 1000.) / 10.) +'% done'
-    eta_old, eta_new, area, discharge,incision,diffusion = f_update(eta_old, eta_new, area, discharge,incision,diffusion)
+    eta_old, eta_new, area, discharge,incision,lateral_incision,diffusion = f_update(eta_old, eta_new, area, discharge,incision,lateral_incision,diffusion)
 
 #cleanup
 for files_temp in os.listdir(parent_folder+'/modules'):

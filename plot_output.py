@@ -53,6 +53,8 @@ for plot_num in xrange(0, num_plots):
         plot(x_plot,y_plot,'discharge',plot_num,r'log($Q$) [-]',length_conversion * length_conversion* length_conversion / time_conversion,1)
     if incision_plot == 1:
         plot(x_plot,y_plot,'incision',plot_num,r'$\epsilon/\upsilon$ [-]',U,0)
+    if lateral_incision_plot == 1:
+        plot(x_plot,y_plot,'lateral_incision',plot_num,r'$\epsilon_l/\upsilon$ [-]',U,0)
     if diffusion_plot == 1:
         plot(x_plot,y_plot,'diffusion',plot_num,r'$D/\upsilon$ [-]',U,0)
     if precipitation_plot == 1:
