@@ -63,9 +63,10 @@ for t in xrange (1,cellst+1):
         eta_ghost = f_hole(eta_old,eta_ghost,direction)
     	eta_ghost = f_bc1(eta_ghost)
         direction,slope,hole = f_direction(eta_ghost,direction,slope,hole)
-        eta_old = f_hole_update(eta_old,eta_ghost)        
+        if fill_holes == 1:
+            eta_old = f_hole_update(eta_old,eta_ghost)        
     discharge,area = f_discharge(discharge,area,direction,precipitation)
-    if lateral_incision_boolean == 1 and t > cellst / 2:
+    if lateral_incision_boolean == 1:
         lateral_incision = f_lateral(discharge,lateral_incision,area,slope,direction)        
     eta_old = f_bc2(eta_old)
     eta_new,incision,diffusion = f_forward(eta_old,eta_new,discharge,slope,uplift,precipitation,incision,diffusion,lateral_incision)

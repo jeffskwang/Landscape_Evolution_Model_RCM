@@ -25,7 +25,7 @@ def f_discharge(discharge,area,direction,precipitation):
                                         bingo = 1
 				else:
 					xloc = xloc + xn[i]
-					yloc = yloc +yn[i]
+					yloc = yloc + yn[i]
 					if BC[0] == 2 and BC[1] == 2:
                                                 if yloc == cellsy+1:
                                                         yloc = 1

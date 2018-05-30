@@ -21,6 +21,8 @@ def f_lateral(discharge,lateral_incision,area,slope,direction):
                                 bingo = 1
                         elif x1 == cellsx and BC[3] == 1:
                                 bingo = 1
+                        elif i1 == -9999:
+                                bingo = 1
 			else:
                                 x2 = x1 + xn[i1]
                                 y2 = y1 + yn[i1]
@@ -46,6 +48,8 @@ def f_lateral(discharge,lateral_incision,area,slope,direction):
                                         bingo = 1
                                 elif x2 == cellsx and BC[3] == 1:
                                         bingo = 1
+                                elif i2 == -9999:
+                                        bingo = 1
                                 else:
                                         x3 = x2 + xn[i2]
                                         y3 = y2 + yn[i2]
@@ -64,8 +68,8 @@ def f_lateral(discharge,lateral_incision,area,slope,direction):
                                         #lateral node location                              
                                         curve = str(i1) + str(i2)
                                         lateral_node_direction = lateral_nodes[curve][int(0.5 + random.random())]
-                                        x_lat = x2 + xn[lateral_node_direction]
-                                        y_lat = y2 + yn[lateral_node_direction]
+                                        xlat = x2 + xn[lateral_node_direction]
+                                        ylat = y2 + yn[lateral_node_direction]
                                                 
                                         if BC[0] == 2 and BC[1] == 2:
                                                 if ylat == cellsy+1:
@@ -79,6 +83,6 @@ def f_lateral(discharge,lateral_incision,area,slope,direction):
                                                         xlat = cellsx
 
                                         inverse_radius_curavture = lateral_nodes[curve][2]
-                                        lateral_incision[x_lat][y_lat] += Kl *(discharge[x2][y2]**m_l)*(slope[x2][y2]**n_l) * inverse_radius_curavture
+                                        lateral_incision[xlat][ylat] += Kl *(discharge[x2][y2]**m_l)*(slope[x2][y2]**n_l) * inverse_radius_curavture
                         
 	return lateral_incision

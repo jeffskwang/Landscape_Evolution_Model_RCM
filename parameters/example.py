@@ -11,8 +11,9 @@ input_file = ''
 
 #controls
 hole_function = 1 #1 is on , 0 is off
-diffusion_deposition = 0 #0 do not allow, 1 is allow
-lateral_incision_boolean = 1
+fill_holes = 0 #0 do not fill holes, 1 fills holes
+diffusion_deposition = 0 #0 do not allow, 1 is allowed
+lateral_incision_boolean = 1 #0 no lateral incision, 1 lateral incison is allowed
 
 #outputs: 0- don't plot, 1 - plot
 elevation_plot = 1
@@ -21,29 +22,29 @@ uplift_plot = 0
 slope_plot = 0
 direction_plot = 0
 discharge_plot = 1
-incision_plot = 1
-lateral_incision_plot = 1
+incision_plot = 0
+lateral_incision_plot = 0
 diffusion_plot = 0
 precipitation_plot = 0
 
 #number of plots
     
-num_plots = 6 #plots
+num_plots = 101 #plots
 
 #units
 time_unit = 'yr' #'sec' or 'hr' or 'yr'
 length_unit = 'm'#'mm' or 'm' or 'km'
 
 #number of cells <---THIS WILL BE OVERWRITTEN IF THERE IS AN INPUT FILE
-cellsx = 100
-cellsy = 100
+cellsx = 50
+cellsy = 50
 
 #time step
-dt = 100. # time unit
+dt = 250. # time unit
 
 #boundary conditions: 0-closed,1-open,2-periodic (NOTE: if top/bottom or left/right must both be 2 in order to work)
 #list is top, bottom, left, right
-BC = [0,1,0,0]
+BC = [0,1,2,2]
 #can only be closed or open
 nan_BC = 0
 
@@ -73,7 +74,7 @@ P = 1.0 #length unit / time unit
 #lateral erosion component
 m_l = 1.0
 n_l = 1.0
-Kl = K * 0.25
+Kl = K * 0.1
 
 #diffusion coefficient
 D = 0.0 #length unit ^ (2) / time unit
