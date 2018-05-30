@@ -12,6 +12,7 @@ input_file = ''
 #controls
 hole_function = 1 #1 is on , 0 is off
 diffusion_deposition = 0 #0 do not allow, 1 is allow
+lateral_incision = 0
 
 #outputs: 0- don't plot, 1 - plot
 elevation_plot = 1
@@ -41,7 +42,7 @@ dt = 100. # time unit
 
 #boundary conditions: 0-closed,1-open,2-periodic (NOTE: if top/bottom or left/right must both be 2 in order to work)
 #list is top, bottom, left, right
-BC = [1,1,2,2]
+BC = [0,1,0,0]
 #can only be closed or open
 nan_BC = 0
 

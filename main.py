@@ -46,6 +46,7 @@ from F_hole import *
 from F_hole_update import *
 from F_discharge import *
 from F_forward import *
+from F_lateral import *
 from F_update import *
 from F_print import *
 
