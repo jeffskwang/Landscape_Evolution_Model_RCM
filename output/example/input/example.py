@@ -29,7 +29,7 @@ precipitation_plot = 0
 
 #number of plots
     
-num_plots = 101 #plots
+num_plots = 11 #plots
 
 #units
 time_unit = 'yr' #'sec' or 'hr' or 'yr'
@@ -74,7 +74,9 @@ P = 1.0 #length unit / time unit
 #lateral erosion component
 m_l = 1.0
 n_l = 1.0
-Kl = K * 0.1
+Kl = K * 1.0
+discharge_constant = 0.4
+discharge_exponent = 0.35
 
 #diffusion coefficient
 D = 0.0 #length unit ^ (2) / time unit

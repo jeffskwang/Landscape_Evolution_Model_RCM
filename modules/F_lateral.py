@@ -83,6 +83,6 @@ def f_lateral(discharge,lateral_incision,area,slope,direction):
                                                         xlat = cellsx
 
                                         inverse_radius_curavture = lateral_nodes[curve][2]
-                                        lateral_incision[xlat][ylat] += Kl *(discharge[x2][y2]**m_l)*(slope[x2][y2]**n_l) * inverse_radius_curavture
+                                        lateral_incision[xlat][ylat] += Kl *(discharge[x2][y2]**m_l)*(slope[x2][y2]**n_l) * inverse_radius_curavture * (discharge_constant * discharge[x2][y2] ** discharge_exponent * dx) / (dx * dx)
                         
 	return lateral_incision
