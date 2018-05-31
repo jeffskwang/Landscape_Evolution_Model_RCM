@@ -3,7 +3,7 @@ import sys
 parameters = importlib.import_module(sys.argv[1])
 globals().update(parameters.__dict__)
 
-def f_forward(eta_old,eta_new,discharge,slope,uplift,precipitation,incision,diffusion,lateral_incision,lateral_incision_threshold,direction):
+def f_forward(eta_old,eta_new,discharge,slope,uplift,precipitation,incision,diffusion,lateral_incision_cumulative,lateral_incision_threshold,direction):
         for x in xrange(1,cellsx+1):
                 eta_new[x][1] = eta_old[x][1]
                 eta_new[x][cellsy] = eta_old[x][cellsy]
@@ -27,7 +27,7 @@ def f_forward(eta_old,eta_new,discharge,slope,uplift,precipitation,incision,diff
         if lateral_incision_boolean == 1:
                 for x in xrange(x_lower,x_upper):
                         for y in xrange(y_lower,y_upper):
-                                if lateral_incision[x][y] > lateral_incision_threshold[x][y]:
+                                if lateral_incision_cumulative[x][y] > lateral_incision_threshold[x][y]:
                                         i = direction[x][y]
                                         xloc = x + xn[i]
                                         yloc = y + yn[i]
@@ -43,8 +43,8 @@ def f_forward(eta_old,eta_new,discharge,slope,uplift,precipitation,incision,diff
                                                 elif xloc == 0:
                                                         xloc = cellsx
                                                         
-                                        lateral_incision[x][y] = 0.0
+                                        lateral_incision_cumulative[x][y] = 0.0
                                         eta_new[x][y] = eta_new[xloc][yloc]	
                 
-	return eta_new,incision,diffusion
+	return eta_new,incision,diffusion,lateral_incision_cumulative
 			

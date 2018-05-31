@@ -60,7 +60,7 @@ Lx = 1000. # length unit
 Ly = 1000. # length unit
 
 #simulation time
-sim_time = 1. * 10. ** (6.) # time unit
+sim_time = 10. * 10. ** (6.) # time unit
 
 #uplift rate
 U = 0.001 #length unit / time unit
