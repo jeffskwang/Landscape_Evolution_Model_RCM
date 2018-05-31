@@ -11,12 +11,11 @@ def f_initial(eta,parent_folder):
                 for x in xrange (1,cellsx+1):
                         for y in xrange (1,cellsy+1):
                                 eta[x][y] = random.random() * rando_scale
-                        
         else:
                 if input_file.endswith('.asc'):
                         input_data = np.loadtxt(parent_folder+'/input/'+input_file, skiprows=6)
                         for x in xrange (1,cellsx+1):
                                 for y in xrange (1,cellsy+1):
-                                        eta[x][y] = input_data[x-1,y-1]
+                                        eta[x][y] = int(input_data[x-1,y-1] / precision) * precision
         return eta
 

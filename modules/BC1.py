@@ -8,16 +8,16 @@ def f_bc1(eta):
                 if BC[i] == 0:
                         if i == 0:
                                 for x in xrange(0,cellsx+2):
-                                        eta[x][-1] = max(max(eta)) ** 2.0
+                                        eta[x][-1] = 1. * 10. ** (20.)
                         elif i == 1:
                                 for x in xrange(0,cellsx+2):
-                                        eta[x][0] = max(max(eta)) ** 2.0
+                                        eta[x][0] = 1. * 10. ** (20.)
                         elif i == 2:
                                 for y in xrange(0,cellsy+2):
-                                        eta[0][y] = max(max(eta)) ** 2.0
+                                        eta[0][y] =1. * 10. ** (20.)
                         elif i == 3:
                                 for y in xrange(0,cellsy+2):
-                                        eta[-1][y] = max(max(eta)) ** 2.0
+                                        eta[-1][y] = 1. * 10. ** (20.)
                 elif BC[i] == 2:
                         if i == 0:
                                 for x in xrange(0,cellsx+2):

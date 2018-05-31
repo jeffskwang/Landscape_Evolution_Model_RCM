@@ -4,7 +4,7 @@ import random
 parameters = importlib.import_module(sys.argv[1])
 globals().update(parameters.__dict__)
 
-def f_lateral(discharge,lateral_incision,area,slope,direction):
+def f_lateral(discharge,lateral_incision,area,slope,direction,lateral_incision_threshold,eta_old):
 	for x in xrange(x_lower,x_upper):
 		for y in xrange(y_lower,y_upper):
 
@@ -38,6 +38,7 @@ def f_lateral(discharge,lateral_incision,area,slope,direction):
                                         elif x2 == 0:
                                                 x2 = cellsx
                                                 
+                                lateral_incision_threshold[x1][y1] = (eta_old[x1][y1] - eta_old[x2][y2]) * dx * dy
                                 i2 = direction[x2][y2]
                                 
                                 if y2 == cellsy and BC[0] == 1:
@@ -81,8 +82,17 @@ def f_lateral(discharge,lateral_incision,area,slope,direction):
                                                         xlat = 1
                                                 elif xlat == 0:
                                                         xlat = cellsx
-
-                                        inverse_radius_curavture = lateral_nodes[curve][2]
-                                        lateral_incision[xlat][ylat] += Kl *(discharge[x2][y2]**m_l)*(slope[x2][y2]**n_l) * inverse_radius_curavture * (discharge_constant * discharge[x2][y2] ** discharge_exponent * dx) / (dx * dx)
+                                
+                                        if ylat == cellsy and BC[0] == 1:
+                                                bingo = 1
+                                        elif ylat == 1 and BC[1] == 1:
+                                                bingo = 1
+                                        elif xlat == 1 and BC[2] == 1:
+                                                bingo = 1
+                                        elif xlat == cellsx and BC[3] == 1:
+                                                bingo = 1
+                                        else:
+                                                inverse_radius_curavture = lateral_nodes[curve][2]
+                                                lateral_incision[xlat][ylat] += dt * Kl *(discharge[x2][y2]**m_l)*(slope[x2][y2]**n_l) * inverse_radius_curavture * (discharge_constant * discharge[x2][y2] ** discharge_exponent * dx)
                         
-	return lateral_incision
+	return lateral_incision, lateral_incision_threshold

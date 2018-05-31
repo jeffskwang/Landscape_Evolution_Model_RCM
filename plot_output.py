@@ -22,7 +22,7 @@ for files_temp in os.listdir(parent_folder +'/output/'+output_folder+'/input'):
 def plot(x,y,plot_type,plot_num,slabel,normalize,log_scale):
     s = np.loadtxt(plot_type + '_'+ '%06d' % plot_num + '.asc', skiprows=6)
     s[s==-9999.]=np.nan
-
+    
     plt.figure(1)
     if log_scale == 0:
         plt.imshow(np.rot90(s)/normalize,extent=[x_plot[0],x_plot[1],y_plot[0],y_plot[1]])
@@ -38,6 +38,9 @@ def plot(x,y,plot_type,plot_num,slabel,normalize,log_scale):
     plt.clf()
     
 print 'plotting...'
+cmap = matplotlib.cm.viridis
+cmap.set_bad('k',1.)
+
 for plot_num in xrange(0, num_plots):
     if elevation_plot == 1:
         plot(x_plot,y_plot,'elevation',plot_num,r'$\eta$ ['+length_unit+']',length_conversion,0)
@@ -54,7 +57,7 @@ for plot_num in xrange(0, num_plots):
     if incision_plot == 1:
         plot(x_plot,y_plot,'incision',plot_num,r'$\epsilon/\upsilon$ [-]',U,0)
     if lateral_incision_plot == 1:
-        plot(x_plot,y_plot,'lateral_incision',plot_num,r'$\epsilon_l/\upsilon$ [-]',U,0)
+        plot(x_plot,y_plot,'lateral_incision',plot_num,r'$\epsilon_l$ [-]',1,0)
     if diffusion_plot == 1:
         plot(x_plot,y_plot,'diffusion',plot_num,r'$D/\upsilon$ [-]',U,0)
     if precipitation_plot == 1:
