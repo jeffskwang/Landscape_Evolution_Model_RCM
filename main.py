@@ -68,7 +68,7 @@ for t in xrange (1,cellst+1):
     if lateral_incision_boolean == 1:
         lateral_incision,lateral_incision_cumulative,lateral_incision_threshold = f_lateral(discharge,lateral_incision,lateral_incision_cumulative,area,slope,direction,lateral_incision_threshold,eta_old)        
     eta_old = f_bc2(eta_old)
-    eta_new,incision,diffusion,,lateral_incision_cumulative = f_forward(eta_old,eta_new,discharge,slope,uplift,precipitation,incision,diffusion,lateral_incision_cumulative,lateral_incision_threshold,direction)
+    eta_new,incision,diffusion,lateral_incision_cumulative = f_forward(eta_old,eta_new,discharge,slope,uplift,precipitation,incision,diffusion,lateral_incision_cumulative,lateral_incision_threshold,direction)
     if plot_array[t] != 0 or t == 1:
         if elevation_plot == 1:
             f_print(eta_new,'elevation',plot_array[t],parent_folder)

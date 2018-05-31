@@ -29,7 +29,7 @@ diffusion_plot = 0
 precipitation_plot = 0
 
 #number of plots
-num_plots = 11 #plots
+num_plots = 51 #plots
 
 #units
 time_unit = 'yr' #'sec' or 'hr' or 'yr'
@@ -60,7 +60,7 @@ Lx = 1000. # length unit
 Ly = 1000. # length unit
 
 #simulation time
-sim_time = 10. * 10. ** (6.) # time unit
+sim_time = 5. * 10. ** (6.) # time unit
 
 #uplift rate
 U = 0.001 #length unit / time unit
