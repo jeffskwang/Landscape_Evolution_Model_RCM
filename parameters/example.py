@@ -29,7 +29,7 @@ diffusion_plot = 0
 precipitation_plot = 0
 
 #number of plots
-num_plots = 251 #plots
+num_plots = 501 #plots
 
 #units
 time_unit = 'yr' #'sec' or 'hr' or 'yr'
