@@ -13,7 +13,7 @@ def f_hole(eta_old,eta_ghost,direction):
                         eta_ghost[x][y] = 1. * 10. ** (20.)
         
         #stage 2
-        epsilon = dx * 0.00000001
+        epsilon = dx * hole_adjustment
         bingo = 0
         go = 0
         while bingo == 0:

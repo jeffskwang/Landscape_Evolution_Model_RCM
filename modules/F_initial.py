@@ -5,17 +5,19 @@ globals().update(parameters.__dict__)
 import random
 import numpy as np
 
-def f_initial(eta,parent_folder):
+def f_initial(eta,eta_average,parent_folder):
         if input_file == '':
                 random.seed(rando_seed)
                 for x in xrange (1,cellsx+1):
                         for y in xrange (1,cellsy+1):
                                 eta[x][y] = random.random() * rando_scale
+                                eta_average[x][y] = eta[x][y]
         else:
                 if input_file.endswith('.asc'):
                         input_data = np.loadtxt(parent_folder+'/input/'+input_file, skiprows=6)
                         for x in xrange (1,cellsx+1):
                                 for y in xrange (1,cellsy+1):
                                         eta[x][y] = int(input_data[x-1,y-1] / precision) * precision
-        return eta
+                                        eta_average[x][y] = eta[x][y]
+        return eta,eta_average
 

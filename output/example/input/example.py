@@ -7,29 +7,30 @@ import os
 ########################
 #IO
 output_folder = os.path.basename(__file__)[:-3]
-input_file = 'elevation_sine.asc'
-precision = 0.000001
+input_file = ''
+precision = 0.000000000001
 
 #controls
-hole_function = 1 #1 is on , 0 is off
+hole_function = 0 #1 is on , 0 is off
 fill_holes = 0 #0 do not fill holes, 1 fills holes
 diffusion_deposition = 0 #0 do not allow, 1 is allowed
-lateral_incision_boolean = 1 #0 no lateral incision, 1 lateral incison is allowed
+lateral_incision_boolean = 0 #0 no lateral incision, 1 lateral incison is allowed
 
 #outputs: 0- don't plot, 1 - plot
 elevation_plot = 1
+elevation_average_plot = 1
 area_plot = 0
 uplift_plot = 0
 slope_plot = 0
 direction_plot = 0
 discharge_plot = 1
 incision_plot = 0
-lateral_incision_plot = 1
+lateral_incision_plot = 0
 diffusion_plot = 0
 precipitation_plot = 0
 
 #number of plots
-num_plots = 51 #plots
+num_plots = 101 #plots
 
 #units
 time_unit = 'yr' #'sec' or 'hr' or 'yr'
@@ -40,7 +41,7 @@ cellsx = 75
 cellsy = 75
 
 #time step
-dt = 250. # time unit
+dt = 1000. # time unit
 
 #boundary conditions: 0-closed,1-open,2-periodic (NOTE: if top/bottom or left/right must both be 2 in order to work)
 #list is top, bottom, left, right
@@ -50,17 +51,20 @@ nan_BC = 0
 
 #initial conditions
 rando_scale = 1. #length_unit
-rando_seed = 13
+rando_seed = 226
+
+#hole functoin
+hole_adjustment = 0.000001
 
 ##PHYSICAL PARAMETERS##
 #######################
 
 #basin size  <---THIS WILL BE OVERWRITTEN IF THERE IS AN INPUT FILE
-Lx = 1000. # length unit
-Ly = 1000. # length unit
+Lx = 10000. # length unit
+Ly = 10000. # length unit
 
 #simulation time
-sim_time = 5. * 10. ** (6.) # time unit
+sim_time = 10. * 10. ** (6.0) # time unit
 
 #uplift rate
 U = 0.001 #length unit / time unit
@@ -68,13 +72,13 @@ U = 0.001 #length unit / time unit
 #stream power incision model
 m = 0.5 #-
 n = 1.0 #-
-K = 1.0 * 10. ** (-4.) #length unit ^ (1-3m) / time unit ^(1-m)
-P = 1.0 #length unit / time unit
+K = 1.0 * 10. ** (-5.0)  #length unit ^ (1-3m) / time unit ^(1-m)
+P = 1. #length unit / time unit
 
 #lateral erosion component
 m_l = 1.0
 n_l = 1.0
-Kl = K * 1.0
+Kl = K * 1.5
 discharge_constant = 0.4
 discharge_exponent = 0.35
 

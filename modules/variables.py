@@ -5,7 +5,9 @@ globals().update(parameters.__dict__)
 
 eta_old = [[0. for i in xrange(cellsy+2)]for j in xrange(cellsx+2)]
 eta_new = [[0. for i in xrange(cellsy+2)]for j in xrange(cellsx+2)]
+eta_temp = [[0. for i in xrange(cellsy+2)]for j in xrange(cellsx+2)]
 eta_ghost = [[0. for i in xrange(cellsy+2)]for j in xrange(cellsx+2)]
+eta_average = [[0. for i in xrange(cellsy+2)]for j in xrange(cellsx+2)]
 slope = [[0. for i in xrange(cellsy+2)]for j in xrange(cellsx+2)]
 direction = [[0 for i in xrange(cellsy+2)]for j in xrange(cellsx+2)]
 area = [[0 for i in xrange(cellsy+2)]for j in xrange(cellsx+2)]

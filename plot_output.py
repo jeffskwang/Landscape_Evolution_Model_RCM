@@ -44,6 +44,8 @@ cmap.set_bad('k',1.)
 for plot_num in xrange(0, num_plots):
     if elevation_plot == 1:
         plot(x_plot,y_plot,'elevation',plot_num,r'$\eta$ ['+length_unit+']',length_conversion,0)
+    if elevation_average_plot == 1:
+        plot(x_plot,y_plot,'elevation_average',plot_num,r'$\eta$ ['+length_unit+']',length_conversion,0)
     if area_plot == 1:
         plot(x_plot,y_plot,'area',plot_num,r'$A$ ['+length_unit+r'$^2$]',length_conversion * length_conversion,0)
     if uplift_plot == 1:
