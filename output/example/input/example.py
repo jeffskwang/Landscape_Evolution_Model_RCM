@@ -7,18 +7,19 @@ import os
 ########################
 #IO
 output_folder = os.path.basename(__file__)[:-3]
-input_file = ''
+input_file = 'XLM_num.asc'
 precision = 0.000000000001
 
 #controls
-hole_function = 0 #1 is on , 0 is off
-fill_holes = 0 #0 do not fill holes, 1 fills holes
+hole_function = 1 #1 is on , 0 is off
+fill_holes = 1 #0 do not fill holes, 1 fills holes
 diffusion_deposition = 0 #0 do not allow, 1 is allowed
 lateral_incision_boolean = 0 #0 no lateral incision, 1 lateral incison is allowed
 
 #outputs: 0- don't plot, 1 - plot
 elevation_plot = 1
-elevation_average_plot = 1
+elevation_paraview_plot = 1
+elevation_average_plot = 0
 area_plot = 0
 uplift_plot = 0
 slope_plot = 0
@@ -41,7 +42,7 @@ cellsx = 75
 cellsy = 75
 
 #time step
-dt = 1000. # time unit
+dt = 500. # time unit
 
 #boundary conditions: 0-closed,1-open,2-periodic (NOTE: if top/bottom or left/right must both be 2 in order to work)
 #list is top, bottom, left, right
@@ -89,11 +90,6 @@ D = 0.0 #length unit ^ (2) / time unit
 ###################
 #time cells
 cellst = int(round(sim_time / dt))
-
-#plotting
-dt_plot = sim_time / float(num_plots - 1)
-x_plot = [0,Lx]
-y_plot = [0,Ly]
 
 #plot array
 plot_array = [0 for i in xrange(0,cellst + 1)]
@@ -151,6 +147,11 @@ if input_file != '':
                 nan_val = int(val)
     Lx = float(cellsx) * dx
     Ly = float(cellsy) * dy
+
+#plotting
+dt_plot = sim_time / float(num_plots - 1)
+x_plot = [0,Lx]
+y_plot = [0,Ly]
 
 #neighbors
 xn = [-1,0,1,-1,1,-1,0,1]

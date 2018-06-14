@@ -18,6 +18,8 @@ lateral_incision_boolean = 1 #0 no lateral incision, 1 lateral incison is allowe
 
 #outputs: 0- don't plot, 1 - plot
 elevation_plot = 1
+elevation_paraview_plot = 1
+elevation_average_plot = 0
 area_plot = 0
 uplift_plot = 0
 slope_plot = 0
@@ -89,11 +91,6 @@ D = 33.0 #length unit ^ (2) / time unit
 #time cells
 cellst = int(round(sim_time / dt))
 
-#plotting
-dt_plot = sim_time / float(num_plots - 1)
-x_plot = [0,Lx]
-y_plot = [0,Ly]
-
 #plot array
 plot_array = [0 for i in xrange(0,cellst + 1)]
 for i in xrange (1,num_plots):
@@ -150,6 +147,11 @@ if input_file != '':
                 nan_val = int(val)
     Lx = float(cellsx) * dx
     Ly = float(cellsy) * dy
+
+#plotting
+dt_plot = sim_time / float(num_plots - 1)
+x_plot = [0,Lx]
+y_plot = [0,Ly]
 
 #neighbors
 xn = [-1,0,1,-1,1,-1,0,1]
