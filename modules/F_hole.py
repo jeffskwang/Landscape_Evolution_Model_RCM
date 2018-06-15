@@ -4,6 +4,7 @@ parameters = importlib.import_module(sys.argv[1])
 globals().update(parameters.__dict__)
 
 def f_hole(eta_old,eta_ghost,direction):
+        #based on Planchon and Darboux 2001
         #stage 1
         for x in xrange(0,cellsx+2):
 		for y in xrange(0,cellsy+2):

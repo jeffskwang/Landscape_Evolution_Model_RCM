@@ -7,12 +7,12 @@ import os
 ########################
 #IO
 output_folder = os.path.basename(__file__)[:-3]
-input_file = 'XLM_num.asc'
+input_file = ''
 precision = 0.000000000001
 
 #controls
-hole_function = 1 #1 is on , 0 is off
-fill_holes = 1 #0 do not fill holes, 1 fills holes
+hole_function = 0 #1 is on , 0 is off
+fill_holes = 0 #0 do not fill holes, 1 fills holes
 diffusion_deposition = 0 #0 do not allow, 1 is allowed
 lateral_incision_boolean = 0 #0 no lateral incision, 1 lateral incison is allowed
 
@@ -31,7 +31,7 @@ diffusion_plot = 0
 precipitation_plot = 0
 
 #number of plots
-num_plots = 101 #plots
+num_plots = 11 #plots
 
 #units
 time_unit = 'yr' #'sec' or 'hr' or 'yr'
@@ -55,7 +55,7 @@ rando_scale = 1. #length_unit
 rando_seed = 226
 
 #hole functoin
-hole_adjustment = 0.000001
+hole_adjustment = 0.000000000000001
 
 ##PHYSICAL PARAMETERS##
 #######################
@@ -65,7 +65,7 @@ Lx = 10000. # length unit
 Ly = 10000. # length unit
 
 #simulation time
-sim_time = 10. * 10. ** (6.0) # time unit
+sim_time = 1. * 10. ** (6.0) # time unit
 
 #uplift rate
 U = 0.001 #length unit / time unit
@@ -90,6 +90,9 @@ D = 0.0 #length unit ^ (2) / time unit
 ###################
 #time cells
 cellst = int(round(sim_time / dt))
+
+#plotting
+dt_plot = sim_time / float(num_plots - 1)
 
 #plot array
 plot_array = [0 for i in xrange(0,cellst + 1)]
@@ -149,7 +152,6 @@ if input_file != '':
     Ly = float(cellsy) * dy
 
 #plotting
-dt_plot = sim_time / float(num_plots - 1)
 x_plot = [0,Lx]
 y_plot = [0,Ly]
 

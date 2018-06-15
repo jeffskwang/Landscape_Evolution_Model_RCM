@@ -1,2 +1,2 @@
-python plot_output.py example
+python plot_output.py hole_nofill
 PAUSE
