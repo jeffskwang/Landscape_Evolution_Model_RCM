@@ -18,7 +18,7 @@ lateral_incision_boolean = 0 #0 no lateral incision, 1 lateral incison is allowe
 
 #outputs: 0- don't plot, 1 - plot
 elevation_plot = 1
-elevation_paraview_plot = 1
+elevation_paraview_plot = 0
 elevation_average_plot = 0
 area_plot = 0
 uplift_plot = 0
@@ -42,7 +42,7 @@ cellsx = 75
 cellsy = 75
 
 #time step
-dt = 500. # time unit
+dt = 1000. # time unit
 
 #boundary conditions: 0-closed,1-open,2-periodic (NOTE: if top/bottom or left/right must both be 2 in order to work)
 #list is top, bottom, left, right
@@ -52,7 +52,7 @@ nan_BC = 0
 
 #initial conditions
 rando_scale = 1. #length_unit
-rando_seed = 226
+rando_seed = 27
 
 #hole functoin
 hole_adjustment = 0.000000000000001
@@ -65,7 +65,7 @@ Lx = 10000. # length unit
 Ly = 10000. # length unit
 
 #simulation time
-sim_time = 1. * 10. ** (6.0) # time unit
+sim_time = 10. * 10. ** (6.0) # time unit
 
 #uplift rate
 U = 0.001 #length unit / time unit
