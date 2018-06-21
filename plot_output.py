@@ -88,7 +88,7 @@ for plot_num in xrange(0, num_plots):
     if area_plot == 1:
         plot('area',plot_num,r'$A$ ['+length_unit+r'$^2$]',length_conversion * length_conversion,0)
     if uplift_plot == 1:
-        plot('uplift',plot_numrr,r'$\upsilon$ ['+length_unit+'/'+time_unit+']',length_conversion/time_conversion,0)
+        plot('uplift',plot_num,r'$\upsilon$ ['+length_unit+'/'+time_unit+']',length_conversion/time_conversion,0)
     if slope_plot == 1:
         plot('slope',plot_num,r'$S$ [-]',1.0,0)
     if direction_plot == 1:
