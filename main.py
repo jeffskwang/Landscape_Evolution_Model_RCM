@@ -100,6 +100,7 @@ for t in xrange (1,cellst+1):
     eta_old, eta_temp, eta_new, eta_average, area, discharge,incision,lateral_incision,diffusion = f_update(eta_old,eta_temp, eta_new, eta_average, area, discharge,incision,lateral_incision,diffusion,t)
 
 f_time_series_print(time_series,parent_folder)
+
 #cleanup
 for files_temp in os.listdir(parent_folder+'/modules'):
     if files_temp.endswith('.pyc'):

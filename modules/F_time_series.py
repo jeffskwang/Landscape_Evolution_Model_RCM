@@ -22,13 +22,14 @@ def f_time_series(time_series,t,eta_old,incision,diffusion,direction,discharge,s
                         sum_incision += incision[x][y]
                         count_incision += 1
                         #mean_diffusion
-                        sum_diffusion += incision[x][y]
+                        sum_diffusion += diffusion[x][y]
                         count_diffusion += 1
                         #energy_expenditure
-                        sum_energy += 9.81 * 1000. * slope[x][y] * discharge[x][y] * dn[direction[x][y]]
+                        if direction[x][y] != -9999:
+                                sum_energy += 9.81 * 1000. * slope[x][y] * discharge[x][y] * dn[direction[x][y]]
 
         #time                
-        time_series[t-1][0] = (t - 1) * dt_plot
+        time_series[t-1][0] = (t - 1) * dt
         #relief
         time_series[t-1][1] = max_ele - min_ele
         #mean_incision

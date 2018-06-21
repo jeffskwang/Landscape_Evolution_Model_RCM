@@ -29,6 +29,7 @@ incision_plot = 0
 lateral_incision_plot = 0
 diffusion_plot = 0
 precipitation_plot = 0
+time_series_plot = 1
 
 #number of plots
 num_plots = 11 #plots
@@ -88,7 +89,7 @@ D = 0.0 #length unit ^ (2) / time unit
 
 ###DO NOT MODIFY###
 ###################
-time_series_header = 'time ['+time_unit+']\ttotal_relief [m]\tmean incision[m/s]\tmean diffusion [m/s]\tenergy expenditure [J]'
+time_series_header = 'time [s]\ttotal_relief [m]\tmean incision[m/s]\tmean diffusion [m/s]\tenergy expenditure [J/s]'
 
 #time cells
 cellst = int(round(sim_time / dt))

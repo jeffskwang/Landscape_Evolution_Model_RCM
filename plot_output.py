@@ -63,6 +63,16 @@ def plot_paraview(plot_type,plot_num):
             xyz_data[k,3] = s[i,j]
             k += 1
     np.savetxt(plot_type +'.csv.'+ '%06d' % (plot_num),xyz_data,delimiter=',',header= 'x, y, z, s', comments='')
+ 
+def time_plot(plot_num,normalize,label,unit):
+    s = np.loadtxt('_time_series.txt', skiprows=1)
+    plt.figure(1)
+    plt.plot(s[:,0]/time_conversion,s[:,plot_num]/normalize)
+    plt.xlabel('t ['+time_unit+']')
+    plt.ylabel(label + ' ['+unit+']')
+    plt.tight_layout()
+    plt.savefig('_' + label + '.png',dpi=300)
+    plt.clf()
     
 print 'plotting...'
 cmap = matplotlib.cm.viridis
@@ -93,4 +103,9 @@ for plot_num in xrange(0, num_plots):
         plot('diffusion',plot_num,r'$D/\upsilon$ [-]',U,0)
     if precipitation_plot == 1:
         plot('precipitation',plot_num,r'$P$ ['+length_unit+'/'+time_unit+']',length_conversion/time_conversion,0)
+    if time_series_plot == 1:
+        time_plot(1,length_conversion,'relief',length_unit)
+        time_plot(2,length_conversion/time_conversion,'mean incision',length_unit+'/'+time_unit)
+        time_plot(3,length_conversion/time_conversion,'mean diffusion',length_unit+'/'+time_unit)
+        time_plot(4,1,'energy expenditure','J/s')
     print str(int(float(plot_num)/float(num_plots - 1) * 1000.) / 10.) +'% done'
