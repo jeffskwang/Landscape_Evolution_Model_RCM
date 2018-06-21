@@ -20,4 +20,7 @@ lateral_incision_cumulative = [[0. for i in xrange(cellsy+2)]for j in xrange(cel
 lateral_incision_threshold = [[0. for i in xrange(cellsy+2)]for j in xrange(cellsx+2)]
 uplift = [[U for i in xrange(cellsy+2)]for j in xrange(cellsx+2)]
 
+#0:time, 1:total relief, 2:average incision, 3:average diffusion, 4:energy expenditure
+time_series = [[0.0 for i in xrange(5)]for j in xrange(cellst)]
+
 hole = [0]

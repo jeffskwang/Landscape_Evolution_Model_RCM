@@ -48,6 +48,8 @@ from F_discharge import *
 from F_forward import *
 from F_lateral import *
 from F_update import *
+from F_time_series import *
+from F_time_series_print import *
 from F_print import *
 
 #Basic outline---functions
@@ -94,8 +96,10 @@ for t in xrange (1,cellst+1):
         if precipitation_plot == 1:
             f_print(precipitation,'precipitation',plot_array[t],parent_folder)
         print str(int(float(t)/float(cellst) * 1000.) / 10.) +'% done'
+    time_series = f_time_series(time_series,t,eta_old,incision,diffusion,direction,discharge,slope)
     eta_old, eta_temp, eta_new, eta_average, area, discharge,incision,lateral_incision,diffusion = f_update(eta_old,eta_temp, eta_new, eta_average, area, discharge,incision,lateral_incision,diffusion,t)
 
+f_time_series_print(time_series,parent_folder)
 #cleanup
 for files_temp in os.listdir(parent_folder+'/modules'):
     if files_temp.endswith('.pyc'):
