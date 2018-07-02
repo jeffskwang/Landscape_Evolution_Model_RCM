@@ -1,3 +1,3 @@
 #!/bin/bash
-pypy main.py example
-python plot_output.py example
+pypy main.py example_XLM_update
+python plot_output.py example_XLM_update

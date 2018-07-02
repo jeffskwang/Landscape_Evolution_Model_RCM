@@ -1,2 +1,1 @@
-python plot_output.py hole_nofill
-PAUSE
+python plot_output.py example_XLM_update

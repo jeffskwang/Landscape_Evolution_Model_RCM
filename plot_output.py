@@ -103,9 +103,10 @@ for plot_num in xrange(0, num_plots):
         plot('diffusion',plot_num,r'$D/\upsilon$ [-]',U,0)
     if precipitation_plot == 1:
         plot('precipitation',plot_num,r'$P$ ['+length_unit+'/'+time_unit+']',length_conversion/time_conversion,0)
-    if time_series_plot == 1:
-        time_plot(1,length_conversion,'relief',length_unit)
-        time_plot(2,length_conversion/time_conversion,'mean incision',length_unit+'/'+time_unit)
-        time_plot(3,length_conversion/time_conversion,'mean diffusion',length_unit+'/'+time_unit)
-        time_plot(4,1,'energy expenditure','J/s')
     print str(int(float(plot_num)/float(num_plots - 1) * 1000.) / 10.) +'% done'
+
+if time_series_plot == 1:
+    time_plot(1,length_conversion,'relief',length_unit)
+    time_plot(2,length_conversion/time_conversion,'mean incision',length_unit+'/'+time_unit)
+    time_plot(3,length_conversion/time_conversion,'mean diffusion',length_unit+'/'+time_unit)
+    time_plot(4,1,'energy expenditure','J/s')

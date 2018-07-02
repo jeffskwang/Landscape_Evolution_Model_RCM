@@ -7,13 +7,14 @@ import os
 ########################
 #IO
 output_folder = os.path.basename(__file__)[:-3]
-input_file = ''
-precision = 0.000000000001
+input_file = ''#'XLM_num_250.asc'
+precision = 0.00000000000000000000000000000000000000000000001
+inclination_initial = 0.0
 
 #controls
-hole_function = 0 #1 is on , 0 is off
-fill_holes = 0 #0 do not fill holes, 1 fills holes
-diffusion_deposition = 0 #0 do not allow, 1 is allowed
+hole_function = 1 #1 is on , 0 is off
+fill_holes = 1 #0 do not fill holes, 1 fills holes
+diffusion_deposition = 1 #0 do not allow, 1 is allowed
 lateral_incision_boolean = 0 #0 no lateral incision, 1 lateral incison is allowed
 
 #outputs: 0- don't plot, 1 - plot
@@ -32,18 +33,18 @@ precipitation_plot = 0
 time_series_plot = 1
 
 #number of plots
-num_plots = 11 #plots
+num_plots = 101 #plots
 
 #units
-time_unit = 'yr' #'sec' or 'hr' or 'yr'
-length_unit = 'm'#'mm' or 'm' or 'km'
+time_unit = 'hr' #'sec' or 'hr' or 'yr'
+length_unit = 'mm'#'mm' or 'm' or 'km'
 
 #number of cells <---THIS WILL BE OVERWRITTEN IF THERE IS AN INPUT FILE
-cellsx = 75
-cellsy = 75
+cellsx = 150
+cellsy = 150
 
 #time step
-dt = 1000. # time unit
+dt = 1. / 60. # time unit
 
 #boundary conditions: 0-closed,1-open,2-periodic (NOTE: if top/bottom or left/right must both be 2 in order to work)
 #list is top, bottom, left, right
@@ -53,29 +54,29 @@ nan_BC = 0
 
 #initial conditions
 rando_scale = 1. #length_unit
-rando_seed = 27
+rando_seed = 123
 
 #hole functoin
-hole_adjustment = 0.000000000000001
+hole_adjustment = 0.0000000001
 
 ##PHYSICAL PARAMETERS##
 #######################
 
 #basin size  <---THIS WILL BE OVERWRITTEN IF THERE IS AN INPUT FILE
-Lx = 10000. # length unit
-Ly = 10000. # length unit
+Lx = 500. # length unit
+Ly = 500. # length unit
 
 #simulation time
-sim_time = 10. * 10. ** (6.0) # time unit
+sim_time = 10000. # time unit
 
 #uplift rate
-U = 0.001 #length unit / time unit
+U = 10.573 #length unit / time unit
 
 #stream power incision model
-m = 0.5 #-
+m = 0.32 #-
 n = 1.0 #-
-K = 1.0 * 10. ** (-5.0)  #length unit ^ (1-3m) / time unit ^(1-m)
-P = 1. #length unit / time unit
+K = 0.765463955 / 1.002028483  #length unit ^ (1-3m) / time unit ^(1-m)
+P = (39.70854912 + 37.94958792 + 36.36652284)/3.0 #length unit / time unit
 
 #lateral erosion component
 m_l = 1.0
@@ -85,7 +86,7 @@ discharge_constant = 0.4
 discharge_exponent = 0.35
 
 #diffusion coefficient
-D = 0.0 #length unit ^ (2) / time unit
+D = 10.#33.0  #length unit ^ (2) / time unit
 
 ###DO NOT MODIFY###
 ###################
