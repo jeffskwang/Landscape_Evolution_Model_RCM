@@ -1,5 +1,6 @@
 import importlib
 import sys
+import random
 parameters = importlib.import_module(sys.argv[1])
 globals().update(parameters.__dict__)
 
@@ -24,3 +25,8 @@ uplift = [[U for i in xrange(cellsy+2)]for j in xrange(cellsx+2)]
 time_series = [[0.0 for i in xrange(5)]for j in xrange(cellst)]
 
 hole = [0]
+
+#precipitation
+for x in xrange (1,cellsx+1):
+        for y in xrange (1,cellsy+1):
+                precipitation[x][y] += 2.0 * (0.5 - random.random()) * P_rando_scale 

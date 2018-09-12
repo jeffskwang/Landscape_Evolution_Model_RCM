@@ -1,1 +1,1 @@
-python plot_output.py example_XLM_update
+python plot_output.py field_example

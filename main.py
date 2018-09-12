@@ -30,6 +30,7 @@ parameters = importlib.import_module(sys.argv[1])
 globals().update(parameters.__dict__)
 if os.path.isdir(parent_folder+'/output/'+output_folder):
     shutil.rmtree(parent_folder+'/output/'+output_folder)
+    time.sleep(5)
 os.makedirs(parent_folder+'/output/'+output_folder)
 os.makedirs(parent_folder+'/output/'+output_folder+'/input')
 shutil.copyfile(parent_folder+'/parameters/'+sys.argv[1]+'.py',parent_folder+'/output/'+output_folder+'/input/'+sys.argv[1]+'.py')
@@ -65,8 +66,7 @@ for t in xrange (1,cellst+1):
         eta_ghost = f_hole(eta_old,eta_ghost,direction)
     	eta_ghost = f_bc1(eta_ghost)
         direction,slope,hole = f_direction(eta_ghost,direction,slope,hole)
-        if fill_holes == 1:
-            eta_old = f_hole_update(eta_old,eta_ghost)        
+        eta_old,discharge,slope = f_hole_update(eta_old,eta_ghost,discharge,slope)            
     discharge,area = f_discharge(discharge,area,direction,precipitation)
     if lateral_incision_boolean == 1:
         lateral_incision,lateral_incision_cumulative,lateral_incision_threshold = f_lateral(discharge,lateral_incision,lateral_incision_cumulative,area,slope,direction,lateral_incision_threshold,eta_old)        
