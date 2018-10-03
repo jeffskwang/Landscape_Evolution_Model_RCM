@@ -7,13 +7,12 @@ import os
 ########################
 #IO
 output_folder = os.path.basename(__file__)[:-3]
-input_file = 'sine_initial_field.asc'#'resize.asc'#'XLM_num_250.asc'
-precision = 0.00000000000000000000000000000000000000000000001
-inclination_initial = 0.0
+input_file = 'sine_initial_field.asc'
 
 #controls
 hole_function = 1 #1 is on , 0 is off
 fill_holes = 0 #0 do not fill holes, 1 fills holes
+#flow_type = 3 #0 d8 method, 1 bifurcation method, 2 d-infinity
 diffusion_deposition = 1 #0 do not allow, 1 is allowed
 lateral_incision_boolean = 0 #0 no lateral incision, 1 lateral incison is allowed
 
@@ -26,7 +25,7 @@ uplift_plot = 0
 slope_plot = 0
 direction_plot = 0
 discharge_plot = 1
-incision_plot = 1
+incision_plot = 0
 lateral_incision_plot = 0
 diffusion_plot = 0
 precipitation_plot = 0
@@ -55,6 +54,8 @@ nan_BC = 0
 #initial conditions
 rando_scale = 0.001 #length_unit
 rando_seed = 111
+inclination_initial = 0.0
+precision = 0.00000000000000000000000000000000000000000000001
 
 #hole functoin
 hole_adjustment = 0.0000000001
@@ -226,3 +227,13 @@ if BC[2] == 1:
     x_lower = 2
 if BC[3] == 1:
     x_upper = cellsx
+
+##x_sort_list = [0 for i in xrange((x_upper - x_lower)*(y_upper - y_lower))]
+##y_sort_list = [0 for i in xrange((x_upper - x_lower)*(y_upper - y_lower))]
+##
+##sort_int = 0
+##for x in xrange(x_lower,x_upper):
+##        for y in xrange(y_lower,y_upper):
+##                x_sort_list[sort_int] = x
+##                y_sort_list[sort_int] = y
+##                sort_int += 1

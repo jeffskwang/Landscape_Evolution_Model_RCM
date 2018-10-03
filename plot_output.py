@@ -6,6 +6,9 @@ import matplotlib
 matplotlib.use('Agg') 
 import matplotlib.pyplot as plt
 
+from matplotlib.colors import LightSource
+ls = LightSource(azdeg=315, altdeg=15)
+
 #parent folder
 output_folder = sys.argv[1]
 parent_folder = os.getcwd()
@@ -23,11 +26,16 @@ def plot(plot_type,plot_num,slabel,normalize,log_scale):
     s = np.loadtxt(plot_type + '_'+ '%06d' % plot_num + '.asc', skiprows=6)
     s[s==-9999.]=np.nan
     plt.figure(1)
-    if log_scale == 0:
-        plt.imshow(np.rot90(s)/normalize,extent=[x_plot[0],x_plot[1],y_plot[0],y_plot[1]])
-    elif log_scale == 1:
-        s[s==0.0]=np.nan
-        plt.imshow(np.rot90(np.log10(s/normalize)),extent=[x_plot[0],x_plot[1],y_plot[0],y_plot[1]])
+
+    if plot_type == 'elevation':
+        rgb = ls.shade(np.rot90(s)/normalize,cmap=cmap,blend_mode='soft',vert_exag=1,dx=dx,dy=dy)
+        plt.imshow(rgb,extent=[x_plot[0],x_plot[1],y_plot[0],y_plot[1]])
+    else:
+        if log_scale == 0:
+            plt.imshow(np.rot90(s)/normalize,extent=[x_plot[0],x_plot[1],y_plot[0],y_plot[1]])
+        elif log_scale == 1:
+            s[s==0.0]=np.nan
+            plt.imshow(np.rot90(np.log10(s/normalize)),extent=[x_plot[0],x_plot[1],y_plot[0],y_plot[1]])
     plt.xlabel('x ['+length_unit+']')
     plt.ylabel('y ['+length_unit+']')
     plt.title('Simulation time = ' + str(float(plot_num) * float(dt_plot)) + time_unit)
@@ -103,10 +111,12 @@ for plot_num in xrange(0, num_plots):
         plot('diffusion',plot_num,r'$D/\upsilon$ [-]',U,0)
     if precipitation_plot == 1:
         plot('precipitation',plot_num,r'$P$ ['+length_unit+'/'+time_unit+']',length_conversion/time_conversion,0)
-    print str(int(float(plot_num)/float(num_plots - 1) * 1000.) / 10.) +'% done'
+    #print str(int(float(plot_num)/float(num_plots - 1) * 1000.) / 10.) +'% done'
 
 if time_series_plot == 1:
     time_plot(1,length_conversion,'relief',length_unit)
     time_plot(2,length_conversion/time_conversion,'mean incision',length_unit+'/'+time_unit)
     time_plot(3,length_conversion/time_conversion,'mean diffusion',length_unit+'/'+time_unit)
     time_plot(4,1,'energy expenditure','J/s')
+
+print 'done'

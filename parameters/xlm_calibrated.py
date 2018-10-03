@@ -8,32 +8,31 @@ import os
 #IO
 output_folder = os.path.basename(__file__)[:-3]
 input_file ='sine_initial.asc'
-precision = 0.00000000000000000000000000000000000000000000001
-inclination_initial = 0.0
 
 #controls
 hole_function = 1 #1 is on , 0 is off
-fill_holes = 1 #0 do not fill holes, 1 fills holes
+fill_holes = 0 #0 do not fill holes, 1 fills holes
+#flow_type = 3 #0 d8 method, 1 bifurcation method, 2 d-infinity
 diffusion_deposition = 1 #0 do not allow, 1 is allowed
 lateral_incision_boolean = 0 #0 no lateral incision, 1 lateral incison is allowed
 
 #outputs: 0- don't plot, 1 - plot
 elevation_plot = 1
-elevation_paraview_plot = 1
+elevation_paraview_plot = 0
 elevation_average_plot = 0
 area_plot = 0
 uplift_plot = 0
 slope_plot = 0
 direction_plot = 0
 discharge_plot = 1
-incision_plot = 1
+incision_plot = 0
 lateral_incision_plot = 0
 diffusion_plot = 0
 precipitation_plot = 0
 time_series_plot = 1
 
 #number of plots
-num_plots = 31 #plots
+num_plots = 11 #plots
 
 #units
 time_unit = 'hr' #'sec' or 'hr' or 'yr'
@@ -53,8 +52,10 @@ BC = [0,1,0,0]
 nan_BC = 0
 
 #initial conditions
-rando_scale = .10 #length_unit
+rando_scale = 1.0 #length_unit
 rando_seed = 12
+inclination_initial = 0.0
+precision = 0.00000000000000000000000000000000000000000000001
 
 #hole functoin
 hole_adjustment = 0.00000000000001
@@ -67,7 +68,7 @@ Lx = 500. # length unit
 Ly = 500. # length unit
 
 #simulation time
-sim_time = 300. # time unit
+sim_time = 100. # time unit
 
 #uplift rate
 U = 10.185 #length unit / time unit
@@ -87,7 +88,7 @@ discharge_constant = 0.4
 discharge_exponent = 0.35
 
 #diffusion coefficient
-D = .07#7.0 #length unit ^ (2) / time unit
+D = 7.0 #length unit ^ (2) / time unit
 
 ###DO NOT MODIFY###
 ###################
@@ -226,3 +227,13 @@ if BC[2] == 1:
     x_lower = 2
 if BC[3] == 1:
     x_upper = cellsx
+
+##x_sort_list = [0 for i in xrange((x_upper - x_lower)*(y_upper - y_lower))]
+##y_sort_list = [0 for i in xrange((x_upper - x_lower)*(y_upper - y_lower))]
+##
+##sort_int = 0
+##for x in xrange(x_lower,x_upper):
+##        for y in xrange(y_lower,y_upper):
+##                x_sort_list[sort_int] = x
+##                y_sort_list[sort_int] = y
+##                sort_int += 1

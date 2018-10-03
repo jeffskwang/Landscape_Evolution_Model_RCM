@@ -2,6 +2,7 @@ import importlib
 import sys
 parameters = importlib.import_module(sys.argv[1])
 globals().update(parameters.__dict__)
+##import numpy
 
 def f_time_series(time_series,t,eta_old,incision,diffusion,direction,discharge,slope):
         min_ele = eta_old[x_lower][y_lower]
@@ -27,7 +28,7 @@ def f_time_series(time_series,t,eta_old,incision,diffusion,direction,discharge,s
                         #energy_expenditure
                         if direction[x][y] != -9999:
                                 sum_energy += 9.81 * 1000. * slope[x][y] * discharge[x][y] * dn[direction[x][y]]
-
+        
         #time                
         time_series[t-1][0] = (t - 1) * dt
         #relief
@@ -38,6 +39,8 @@ def f_time_series(time_series,t,eta_old,incision,diffusion,direction,discharge,s
         time_series[t-1][3] = sum_diffusion / float(count_diffusion)
         #energy_expenditure
         time_series[t-1][4] = sum_energy
+##        #95 percentile of the elevation data
+##        time_series[t-1][5] = numpy.percentile(eta_old,95)
         
 	return time_series
 			

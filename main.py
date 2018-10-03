@@ -46,6 +46,9 @@ from F_direction import *
 from F_hole import *
 from F_hole_update import *
 from F_discharge import *
+##from F_discharge_d8 import *
+##from F_discharge_bifurcation import *
+##from F_discharge_d_infinity import *
 from F_forward import *
 from F_lateral import *
 from F_update import *
@@ -66,8 +69,16 @@ for t in xrange (1,cellst+1):
         eta_ghost = f_hole(eta_old,eta_ghost,direction)
     	eta_ghost = f_bc1(eta_ghost)
         direction,slope,hole = f_direction(eta_ghost,direction,slope,hole)
-        eta_old,discharge,slope = f_hole_update(eta_old,eta_ghost,discharge,slope)            
+        eta_old,discharge,slope = f_hole_update(eta_old,eta_ghost,discharge,slope)
+##    if flow_type == 0:
+##        discharge,area = f_discharge_d8(discharge,area,direction,eta_ghost,precipitation)
+##    elif flow_type == 1:
+##        discharge,area = f_discharge_bifurcation(discharge,area,eta_ghost,precipitation)
+##    elif flow_type == 2:
+##        discharge,area = f_discharge_d_infinity(discharge,area,eta_ghost,precipitation)
+##    else:
     discharge,area = f_discharge(discharge,area,direction,precipitation)
+        
     if lateral_incision_boolean == 1:
         lateral_incision,lateral_incision_cumulative,lateral_incision_threshold = f_lateral(discharge,lateral_incision,lateral_incision_cumulative,area,slope,direction,lateral_incision_threshold,eta_old)        
     eta_old = f_bc2(eta_old)

@@ -29,4 +29,4 @@ hole = [0]
 #precipitation
 for x in xrange (1,cellsx+1):
         for y in xrange (1,cellsy+1):
-                precipitation[x][y] += 2.0 * (0.5 - random.random()) * P_rando_scale 
+                precipitation[x][y] += 2.0 * (0.5 - random.random()) * P_rando_scale

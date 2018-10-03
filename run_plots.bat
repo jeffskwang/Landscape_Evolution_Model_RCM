@@ -1,1 +1,2 @@
+python plot_output.py xlm_calibrated
 python plot_output.py field_example

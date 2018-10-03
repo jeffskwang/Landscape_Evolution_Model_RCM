@@ -1,23 +1,5 @@
 #!/bin/bash
-pypy main.py xlm_mn_25_1
-python plot_output.py xlm_mn_25_1
-pypy main.py xlm_mn_26_1
-python plot_output.py xlm_mn_26_1
-pypy main.py xlm_mn_27_1
-python plot_output.py xlm_mn_27_1
-pypy main.py xlm_mn_28_1
-python plot_output.py xlm_mn_28_1
-pypy main.py xlm_mn_29_1
-python plot_output.py xlm_mn_29_1
-pypy main.py xlm_mn_30_1
-python plot_output.py xlm_mn_30_1
-pypy main.py xlm_mn_31_1
-python plot_output.py xlm_mn_31_1
-pypy main.py xlm_mn_32_1
-python plot_output.py xlm_mn_32_1
-pypy main.py xlm_mn_33_1
-python plot_output.py xlm_mn_33_1
-pypy main.py xlm_mn_34_1
-python plot_output.py xlm_mn_34_1
-pypy main.py xlm_mn_35_1
-python plot_output.py xlm_mn_35_1
+pypy main.py xlm_calibrated
+pypy main.py field_example
+python plot_output.py xlm_calibrated
+python plot_output.py field_example
