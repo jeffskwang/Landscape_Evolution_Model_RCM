@@ -30,6 +30,8 @@ def plot(plot_type,plot_num,slabel,normalize,log_scale):
     if plot_type == 'elevation':
         rgb = ls.shade(np.rot90(s)/normalize,cmap=cmap,blend_mode='soft',vert_exag=1,dx=dx,dy=dy)
         plt.imshow(rgb,extent=[x_plot[0],x_plot[1],y_plot[0],y_plot[1]])
+        im_dummy = plt.imshow(np.rot90((s/normalize)), cmap=cmap, extent=[x_plot[0],x_plot[1],y_plot[0],y_plot[1]])
+        im_dummy.remove()
     else:
         if log_scale == 0:
             plt.imshow(np.rot90(s)/normalize,extent=[x_plot[0],x_plot[1],y_plot[0],y_plot[1]])
@@ -39,7 +41,11 @@ def plot(plot_type,plot_num,slabel,normalize,log_scale):
     plt.xlabel('x ['+length_unit+']')
     plt.ylabel('y ['+length_unit+']')
     plt.title('Simulation time = ' + str(float(plot_num) * float(dt_plot)) + time_unit)
-    plt.colorbar(label = slabel)
+
+    if plot_type == 'elevation':
+        plt.colorbar(im_dummy, label = slabel)
+    else:
+        plt.colorbar(label = slabel)
     plt.tight_layout()
     plt.savefig(plot_type + '_'+ '%06d' % plot_num + '.png',dpi=300)
     plt.clf()
