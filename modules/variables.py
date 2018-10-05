@@ -25,6 +25,7 @@ uplift = [[U for i in xrange(cellsy+2)]for j in xrange(cellsx+2)]
 time_series = [[0.0 for i in xrange(5)]for j in xrange(cellst)]
 
 hole = [0]
+direction_update = [0]
 
 #precipitation
 for x in xrange (1,cellsx+1):

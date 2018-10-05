@@ -46,6 +46,7 @@ from F_direction import *
 from F_hole import *
 from F_hole_update import *
 from F_discharge import *
+from F_discharge_update import *
 ##from F_discharge_d8 import *
 ##from F_discharge_bifurcation import *
 ##from F_discharge_d_infinity import *
@@ -63,13 +64,13 @@ eta_old,eta_average = f_initial(eta_old,eta_average,parent_folder)
 number_of_holes = 0
 for t in xrange (1,cellst+1):
     eta_old = f_bc1(eta_old)
-    direction,slope,hole = f_direction(eta_old,direction,slope,hole)
-    if hole[0] == 1 and hole_function == 1:
+    direction,slope,hole,direction_update = f_direction(eta_old,direction,slope,hole,direction_update)
+    if hole[0] == 1 and hole_function == 1 and direction_update[0] == 1:
         number_of_holes += 1
         eta_ghost = f_hole(eta_old,eta_ghost,direction)
     	eta_ghost = f_bc1(eta_ghost)
-        direction,slope,hole = f_direction(eta_ghost,direction,slope,hole)
-        eta_old,discharge,slope = f_hole_update(eta_old,eta_ghost,discharge,slope)
+        direction,slope,hole,direction_update = f_direction(eta_ghost,direction,slope,hole,direction_update)
+        eta_old,slope = f_hole_update(eta_old,eta_ghost,slope)
 ##    if flow_type == 0:
 ##        discharge,area = f_discharge_d8(discharge,area,direction,eta_ghost,precipitation)
 ##    elif flow_type == 1:
@@ -77,7 +78,9 @@ for t in xrange (1,cellst+1):
 ##    elif flow_type == 2:
 ##        discharge,area = f_discharge_d_infinity(discharge,area,eta_ghost,precipitation)
 ##    else:
-    discharge,area = f_discharge(discharge,area,direction,precipitation)
+    if direction_update[0] == 1:
+        discharge,area = f_discharge_update(discharge, area)
+        discharge,area = f_discharge(discharge,area,direction,precipitation)
         
     if lateral_incision_boolean == 1:
         lateral_incision,lateral_incision_cumulative,lateral_incision_threshold = f_lateral(discharge,lateral_incision,lateral_incision_cumulative,area,slope,direction,lateral_incision_threshold,eta_old)        
@@ -108,10 +111,9 @@ for t in xrange (1,cellst+1):
             f_print(precipitation,'precipitation',plot_array[t],parent_folder)
         print str(int(float(t)/float(cellst) * 1000.) / 10.) +'% done'
     time_series = f_time_series(time_series,t,eta_old,incision,diffusion,direction,discharge,slope)
-    eta_old, eta_temp, eta_new, eta_average, area, discharge,incision,lateral_incision,diffusion = f_update(eta_old,eta_temp, eta_new, eta_average, area, discharge,incision,lateral_incision,diffusion,t)
+    eta_old, eta_temp, eta_new, eta_average,incision,lateral_incision,diffusion = f_update(eta_old,eta_temp, eta_new, eta_average,incision,lateral_incision,diffusion,t)
 
 f_time_series_print(time_series,parent_folder)
-
 #cleanup
 for files_temp in os.listdir(parent_folder+'/modules'):
     if files_temp.endswith('.pyc'):
