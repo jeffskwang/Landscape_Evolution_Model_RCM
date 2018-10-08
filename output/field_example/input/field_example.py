@@ -32,11 +32,12 @@ precipitation_plot = 0
 time_series_plot = 1
 
 #number of plots
-num_plots = 11 #plots
+num_plots = 101 #plots
 
 #units
-time_unit = 'yr' #'sec' or 'hr' or 'yr'
+time_unit = 'yr' #'sec' or 'hr' or 'day' or 'yr'
 length_unit = 'm'#'mm' or 'm' or 'km'
+time_unit_plot = 'Myr' #'sec' or 'hr' or 'day' or 'yr' or 'kyr' or 'Myr' or 'Byr'
 
 #number of cells <---THIS WILL BE OVERWRITTEN IF THERE IS AN INPUT FILE
 cellsx = 150
@@ -54,7 +55,7 @@ nan_BC = 0
 #initial conditions
 rando_scale = 0.001 #length_unit
 rando_seed = 111
-inclination_initial = 0.0
+inclination_initial = 0.1 / 10000.
 precision = 0.00000000000000000000000000000000000000000000001
 
 #hole functoin
@@ -83,7 +84,7 @@ P_rando_scale = 0.0
 #lateral erosion component
 m_l = 1.0
 n_l = 1.0
-Kl = K * 1.5
+Kl = K * 1.0
 discharge_constant = 0.4
 discharge_exponent = 0.35
 
@@ -112,6 +113,8 @@ dy = Ly/cellsy#m
 #conversion to meters and seconds
 if time_unit == 'yr':
     time_conversion = 365.25 * 24. * 3600.
+elif time_unit == 'day':
+    time_conversion = 24. * 3600.
 elif time_unit == 'hr':
     time_conversion = 3600.
 elif time_unit == 'sec':

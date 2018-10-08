@@ -35,8 +35,9 @@ time_series_plot = 1
 num_plots = 11 #plots
 
 #units
-time_unit = 'hr' #'sec' or 'hr' or 'yr'
+time_unit = 'hr' #'sec' or 'hr' or 'day' or 'yr'
 length_unit = 'mm'#'mm' or 'm' or 'km'
+time_unit_plot = 'hr' #'sec' or 'hr' or 'day' or 'yr' or 'kyr' or 'Myr' or 'Byr'
 
 #number of cells <---THIS WILL BE OVERWRITTEN IF THERE IS AN INPUT FILE
 cellsx = 150
@@ -112,6 +113,8 @@ dy = Ly/cellsy#m
 #conversion to meters and seconds
 if time_unit == 'yr':
     time_conversion = 365.25 * 24. * 3600.
+elif time_unit == 'day':
+    time_conversion = 24. * 3600.
 elif time_unit == 'hr':
     time_conversion = 3600.
 elif time_unit == 'sec':

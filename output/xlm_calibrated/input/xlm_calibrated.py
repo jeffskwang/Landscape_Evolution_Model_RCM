@@ -37,6 +37,7 @@ num_plots = 11 #plots
 #units
 time_unit = 'hr' #'sec' or 'hr' or 'yr'
 length_unit = 'mm'#'mm' or 'm' or 'km'
+time_unit_plot = 'hr' #'sec' or 'hr' or 'yr' or 'kyr' or 'Myr' or 'Byr'
 
 #number of cells <---THIS WILL BE OVERWRITTEN IF THERE IS AN INPUT FILE
 cellsx = 150

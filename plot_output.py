@@ -21,6 +21,69 @@ for files_temp in os.listdir(parent_folder +'/output/'+output_folder+'/input'):
         parameters = importlib.import_module(files_temp[:-3])
         globals().update(parameters.__dict__)
 
+#change of time unit
+def time_unit_function(time_unit, time_unit_plot):
+    if time_unit == 'sec' and time_unit_plot == 'sec':
+        time_rescale = 1.0
+    elif time_unit == 'sec' and time_unit_plot == 'hr':
+        time_rescale = 1. / 3600.
+    elif time_unit == 'sec' and time_unit_plot == 'day':
+        time_rescale = 1. / 3600. / 24. 
+    elif time_unit == 'sec' and time_unit_plot == 'yr':
+        time_rescale = 1. / 3600. / 24. / 365.25
+    elif time_unit == 'sec' and time_unit_plot == 'kyr':
+        time_rescale = 1. / 3600. / 24. / 365.25 / 1000.
+    elif time_unit == 'sec' and time_unit_plot == 'Myr':
+        time_rescale = 1. / 3600. / 24. / 365.25 / 1000000.
+    elif time_unit == 'sec' and time_unit_plot == 'Byr':
+        time_rescale = 1. / 3600. / 24. / 365.25 / 1000000000.
+        
+    elif time_unit == 'hr' and time_unit_plot == 'sec':
+        time_rescale = 3600.
+    elif time_unit == 'hr' and time_unit_plot == 'hr':
+        time_rescale = 1.
+    elif time_unit == 'hr' and time_unit_plot == 'day':
+        time_rescale = 1. / 24. 
+    elif time_unit == 'hr' and time_unit_plot == 'yr':
+        time_rescale = 1.  / 24. / 365.25
+    elif time_unit == 'hr' and time_unit_plot == 'kyr':
+        time_rescale = 1.  / 24. / 365.25 / 1000.
+    elif time_unit == 'hr' and time_unit_plot == 'Myr':
+        time_rescale = 1.  / 24. / 365.25 / 1000000.
+    elif time_unit == 'hr' and time_unit_plot == 'Byr':
+        time_rescale = 1.  / 24. / 365.25 / 1000000000.
+        
+    elif time_unit == 'day' and time_unit_plot == 'sec':
+        time_rescale = 24. * 3600.
+    elif time_unit == 'day' and time_unit_plot == 'hr':
+        time_rescale = 24.
+    elif time_unit == 'day' and time_unit_plot == 'day':
+        time_rescale = 1.
+    elif time_unit == 'day' and time_unit_plot == 'yr':
+        time_rescale = 1. / 365.25
+    elif time_unit == 'day' and time_unit_plot == 'kyr':
+        time_rescale = 1. / 365.25 / 1000.
+    elif time_unit == 'day' and time_unit_plot == 'Myr':
+        time_rescale = 1. / 365.25 / 1000000.
+    elif time_unit == 'day' and time_unit_plot == 'Byr':
+        time_rescale = 1. / 365.25 / 1000000000.
+        
+    elif time_unit == 'yr' and time_unit_plot == 'sec':
+        time_rescale = 3600. * 24. * 365.25
+    elif time_unit == 'yr' and time_unit_plot == 'hr':
+        time_rescale = 24. * 365.25
+    elif time_unit == 'yr' and time_unit_plot == 'day':
+        time_rescale = 365.25
+    elif time_unit == 'yr' and time_unit_plot == 'yr':
+        time_rescale = 1.
+    elif time_unit == 'yr' and time_unit_plot == 'kyr':
+        time_rescale = 1. / 1000.
+    elif time_unit == 'yr' and time_unit_plot == 'Myr':
+        time_rescale = 1. / 1000000.
+    elif time_unit == 'yr' and time_unit_plot == 'Byr':
+        time_rescale = 1. / 1000000000.
+        
+    return time_rescale
 #plot_function
 def plot(plot_type,plot_num,slabel,normalize,log_scale):
     s = np.loadtxt(plot_type + '_'+ '%06d' % plot_num + '.asc', skiprows=6)
@@ -40,7 +103,10 @@ def plot(plot_type,plot_num,slabel,normalize,log_scale):
             plt.imshow(np.rot90(np.log10(s/normalize)),extent=[x_plot[0],x_plot[1],y_plot[0],y_plot[1]])
     plt.xlabel('x ['+length_unit+']')
     plt.ylabel('y ['+length_unit+']')
-    plt.title('Simulation time = ' + str(float(plot_num) * float(dt_plot)) + time_unit)
+
+    time_rescale = time_unit_function(time_unit, time_unit_plot)
+    
+    plt.title('Simulation time = ' + str(float(plot_num) * float(dt_plot) * time_rescale)  + ' ' + time_unit_plot)
 
     if plot_type == 'elevation':
         plt.colorbar(im_dummy, label = slabel)
