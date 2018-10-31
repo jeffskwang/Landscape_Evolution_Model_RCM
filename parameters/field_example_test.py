@@ -12,7 +12,7 @@ input_file = 'sine_initial_field.asc'
 #controls
 hole_function = 1 #1 is on , 0 is off
 fill_holes = 0 #0 do not fill holes, 1 fills holes
-#flow_type = 3 #0 d8 method, 1 bifurcation method, 2 d-infinity
+##UNDER CONSTRUCTION##flow_type = 3 #0 d8 method, 1 bifurcation method, 2 d-infinity
 diffusion_deposition = 1 #0 do not allow, 1 is allowed
 lateral_incision_boolean = 0 #0 no lateral incision, 1 lateral incison is allowed
 
