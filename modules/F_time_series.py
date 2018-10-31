@@ -27,7 +27,7 @@ def f_time_series(time_series,t,eta_old,incision,diffusion,direction,discharge,s
                         count_diffusion += 1
                         #energy_expenditure
                         if direction[x][y] != -9999:
-                                sum_energy += 9.81 * 1000. * slope[x][y] * discharge[x][y] * dn[direction[x][y]]
+                                sum_energy += 1.0 * (discharge[x][y] ** 0.5) * dn[direction[x][y]]
         
         #time                
         time_series[t-1][0] = (t - 1) * dt

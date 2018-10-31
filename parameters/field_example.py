@@ -32,7 +32,7 @@ precipitation_plot = 0
 time_series_plot = 1
 
 #number of plots
-num_plots = 101 #plots
+num_plots = 1001 #plots
 
 #units
 time_unit = 'yr' #'sec' or 'hr' or 'day' or 'yr'
@@ -44,7 +44,7 @@ cellsx = 150
 cellsy = 150
 
 #time step
-dt = 500. # time unit
+dt = 1000. # time unit
 
 #boundary conditions: 0-closed,1-open,2-periodic (NOTE: if top/bottom or left/right must both be 2 in order to work)
 #list is top, bottom, left, right
@@ -55,7 +55,7 @@ nan_BC = 0
 #initial conditions
 rando_scale = 0.001 #length_unit
 rando_seed = 111
-inclination_initial = 0.1 / 10000.
+inclination_initial = 0.01 / 10000.
 precision = 0.00000000000000000000000000000000000000000000001
 
 #hole functoin
@@ -69,7 +69,7 @@ Lx = 10000. # length unit
 Ly = 10000. # length unit
 
 #simulation time
-sim_time = 50.0 * 10. ** (6.) # time unit
+sim_time = 100.0 * 10. ** (6.) # time unit
 
 #uplift rate
 U = 0.001 #length unit / time unit

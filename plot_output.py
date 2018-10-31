@@ -97,10 +97,10 @@ def plot(plot_type,plot_num,slabel,normalize,log_scale):
         im_dummy.remove()
     else:
         if log_scale == 0:
-            plt.imshow(np.rot90(s)/normalize,extent=[x_plot[0],x_plot[1],y_plot[0],y_plot[1]])
+            plt.imshow(np.rot90(s)/normalize,extent=[x_plot[0],x_plot[1],y_plot[0],y_plot[1]],cmap=cmap)
         elif log_scale == 1:
             s[s==0.0]=np.nan
-            plt.imshow(np.rot90(np.log10(s/normalize)),extent=[x_plot[0],x_plot[1],y_plot[0],y_plot[1]])
+            plt.imshow(np.rot90(np.log10(s/normalize)),extent=[x_plot[0],x_plot[1],y_plot[0],y_plot[1]],cmap=cmap)
     plt.xlabel('x ['+length_unit+']')
     plt.ylabel('y ['+length_unit+']')
 
@@ -115,6 +115,56 @@ def plot(plot_type,plot_num,slabel,normalize,log_scale):
     plt.tight_layout()
     plt.savefig(plot_type + '_'+ '%06d' % plot_num + '.png',dpi=300)
     plt.clf()
+
+###plot_function
+def plot_memory(plot_type,plot_num,slabel,normalize,log_scale):
+    memory_difference = 123213.
+    s_old = np.loadtxt(plot_type + '_000000.asc', skiprows=6)
+    s_old[s_old < area_threshold] = -9999
+    s_old[s_old >= area_threshold] = 1.0
+    s_old[s_old == -9999.]=np.nan
+    s_new = np.loadtxt(plot_type + '_'+ '%06d' % plot_num + '.asc', skiprows=6)
+    s_new[s_new < area_threshold] = -9999.
+    s_new[s_new >= area_threshold] = 1.0
+    s_new[s_new == -9999.]=np.nan
+    
+    old_memory_total = 0.0
+    new_memory_total = 0.0
+    plt.figure(1)
+    s_difference = np.empty_like(s_old)
+    for x in xrange(0,s_old.shape[0]):
+            for y in xrange(0,s_old.shape[1]):
+                if s_old[x,y] == 1.0 and s_new[x,y] == 1.0: 
+                    s_difference[x,y] = 2.0
+                    new_memory_total += 1.0
+                elif np.isnan(s_old[x,y]) and s_new[x,y] == 1.0: 
+                    s_difference[x,y] = 0.0
+                elif np.isnan(s_new[x,y]) and s_old[x,y] == 1.0: 
+                    s_difference[x,y] = 1.0
+                elif np.isnan(s_old[x,y]) and np.isnan(s_new[x,y]): 
+                    s_difference[x,y] = np.nan
+
+                if s_old[x,y] == 1.0:
+                    old_memory_total += 1.0
+
+    plt.imshow(np.rot90(s_difference)/normalize,extent=[x_plot[0],x_plot[1],y_plot[0],y_plot[1]],cmap=cmap_memory,vmin=0.0,vmax=2.0)
+    plt.xlabel('x ['+length_unit+']')
+    plt.ylabel('y ['+length_unit+']')
+
+    time_rescale = time_unit_function(time_unit, time_unit_plot)
+    
+    plt.title('Simulation time = ' + str(float(plot_num) * float(dt_plot) * time_rescale)  + ' ' + time_unit_plot)
+
+    plt.colorbar(label = slabel)
+    plt.tight_layout()
+    plt.savefig('memory_'+ '%06d' % plot_num + '.png',dpi=300)
+    plt.clf()
+
+    if old_memory_total != 0:
+        memory_difference = float(new_memory_total) / float(old_memory_total)
+    else:
+        memory_difference = 0.0
+    return memory_difference
 
 #plot_paraview_function
 def plot_paraview(plot_type,plot_num):
@@ -157,6 +207,12 @@ def time_plot(plot_num,normalize,label,unit):
 print 'plotting...'
 cmap = matplotlib.cm.viridis
 cmap.set_bad('k',1.)
+cmap_memory = matplotlib.cm.brg
+cmap_memory.set_bad('k',1.)
+
+if memory_plot == 1:
+    memory_data = np.zeros((num_plots,2))
+    memory_data[:,0] = np.linspace(0,dt_plot * float(num_plots - 1),num_plots)
 
 for plot_num in xrange(0, num_plots):
     if elevation_plot == 1:
@@ -166,7 +222,9 @@ for plot_num in xrange(0, num_plots):
     if elevation_average_plot == 1:
         plot('elevation_average',plot_num,r'$\eta$ ['+length_unit+']',length_conversion,0)
     if area_plot == 1:
-        plot('area',plot_num,r'$A$ ['+length_unit+r'$^2$]',length_conversion * length_conversion,0)
+        plot('area',plot_num,r'$A$ ['+length_unit+r'$^2$]',length_conversion * length_conversion,1)
+    if memory_plot == 1:
+        memory_data[plot_num,1] = plot_memory('area',plot_num,r'$A$ ['+length_unit+r'$^2$]',length_conversion * length_conversion,0)        
     if uplift_plot == 1:
         plot('uplift',plot_num,r'$\upsilon$ ['+length_unit+'/'+time_unit+']',length_conversion/time_conversion,0)
     if slope_plot == 1:
@@ -185,10 +243,19 @@ for plot_num in xrange(0, num_plots):
         plot('precipitation',plot_num,r'$P$ ['+length_unit+'/'+time_unit+']',length_conversion/time_conversion,0)
     #print str(int(float(plot_num)/float(num_plots - 1) * 1000.) / 10.) +'% done'
 
+if memory_plot == 1:
+    plt.figure(1)
+    plt.plot(memory_data[:,0],memory_data[:,1])
+    plt.xlabel('t ['+time_unit+']')
+    plt.ylabel('memory [-]')
+    plt.tight_layout()
+    plt.savefig('_MEMORY_TIME.png',dpi=300)
+    plt.clf()
+    
 if time_series_plot == 1:
     time_plot(1,length_conversion,'relief',length_unit)
     time_plot(2,length_conversion/time_conversion,'mean incision',length_unit+'/'+time_unit)
     time_plot(3,length_conversion/time_conversion,'mean diffusion',length_unit+'/'+time_unit)
-    time_plot(4,1,'energy expenditure','J/s')
+    time_plot(4,1,'energy expenditure','Total Energy Expenditure')
 
 print 'done'
